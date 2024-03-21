@@ -56,14 +56,14 @@ namespace Infrastructure.Multiplayer
 
         private void CreatePlayer(Player player)
         {
-            var playerPosition = new Vector3(player.x, 0, player.y);
+            var playerPosition = new Vector3(player.positionX, player.positionY, player.positionZ);
             
             Instantiate(playerPrefab, playerPosition, Quaternion.identity);
         }
 
         private void CreateEnemy(string key, Player enemy)
         {
-            var enemyPosition = new Vector3(enemy.x, 0, enemy.y);
+            var enemyPosition = new Vector3(enemy.positionX, enemy.positionY, enemy.positionZ);
             
             EnemyController enemyController = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
             enemy.OnChange += enemyController.OnChange;
