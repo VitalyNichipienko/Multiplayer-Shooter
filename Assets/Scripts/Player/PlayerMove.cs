@@ -19,11 +19,12 @@ namespace PlayerLogic
         [SerializeField] private float maxHeadAngle = -90;
 
         [SerializeField] private float jumpForce;
-
+        [SerializeField] private CheckFly checkFly;
+        
+        
         private float _rotateY;
         private float _currentRotateZ;
-        private bool _isFly;
-
+        
         private void Start()
         {
             Transform camera = Camera.main.transform;
@@ -54,22 +55,6 @@ namespace PlayerLogic
                 RotateY();
                 RotateZ(-_inputService.MouseAxis.y * _mouseSensetivity);
             }
-        }
-
-        private void OnCollisionStay(Collision other)
-        {
-            ContactPoint[] contactPoints = other.contacts;
-
-            for (int i = 0; i < contactPoints.Length; i++)
-            {
-                if (contactPoints[i].normal.y > 0.45f)
-                    _isFly = false;
-            }
-        }
-
-        private void OnCollisionExit(Collision other)
-        {
-            _isFly = true;
         }
 
         private void Move()
@@ -111,7 +96,7 @@ namespace PlayerLogic
 
         private void Jump()
         {
-            if (_isFly)
+            if (checkFly.IsFly)
                 return;
 
             rigidbody.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
