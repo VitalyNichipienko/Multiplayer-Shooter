@@ -86,6 +86,9 @@ MonoBehaviour:
   head: {fileID: 6974407077988971835}
   _mouseSensetivity: 5
   cameraPoint: {fileID: 5972751703288385518}
+  minHeadAngle: 90
+  maxHeadAngle: -90
+  jumpForce: 5
 --- !u!114 &6981566648387276659
 MonoBehaviour:
   m_ObjectHideFlags: 0

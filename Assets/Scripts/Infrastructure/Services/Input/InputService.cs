@@ -13,5 +13,7 @@ namespace Infrastructure.Services.Input
         public Vector2 Axis => new Vector2(UnityEngine.Input.GetAxis(Horizontal), UnityEngine.Input.GetAxis(Vertical));
 
         public Vector2 MouseAxis => new Vector2(UnityEngine.Input.GetAxis(MouseX), UnityEngine.Input.GetAxis(MouseY));
+
+        public bool Space => UnityEngine.Input.GetKeyDown(KeyCode.Space);
     }
 }
