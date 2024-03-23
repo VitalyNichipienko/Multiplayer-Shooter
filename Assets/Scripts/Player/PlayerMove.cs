@@ -13,7 +13,21 @@ namespace PlayerLogic
         
         [SerializeField] private Transform head;
         [SerializeField] private float _mouseSensetivity;
+
+        [SerializeField] private Transform cameraPoint;
+        [SerializeField] private float minHeadAngle = 90;
+        [SerializeField] private float maxHeadAngle = -90;
+        
         private float _rotateY;
+        private float _currentRotateZ;
+
+        private void Start()
+        {
+            Transform camera = Camera.main.transform;
+            camera.parent = cameraPoint;
+            camera.localPosition = Vector3.zero;
+            camera.localRotation = Quaternion.identity;
+        }
 
         private void FixedUpdate()
         {
@@ -62,7 +76,8 @@ namespace PlayerLogic
         
         private void RotateZ(float value)
         {
-            head.Rotate(0, 0, value);
+            _currentRotateZ = Mathf.Clamp(_currentRotateZ + value, minHeadAngle, maxHeadAngle);
+            head.localEulerAngles = new Vector3(0, 0, _currentRotateZ);
         }
     }
 }
