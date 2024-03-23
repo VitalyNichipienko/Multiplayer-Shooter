@@ -24,6 +24,9 @@ namespace PlayerLogic
         
         private float _rotateY;
         private float _currentRotateZ;
+
+        private float _jumpDelay = 0.2f;
+        private float _lastJumpTime;
         
         private void Start()
         {
@@ -96,10 +99,15 @@ namespace PlayerLogic
 
         private void Jump()
         {
-            if (checkFly.IsFly)
+            if (checkFly.IsFly || AlreadyJumped())
                 return;
-
+            
+            _lastJumpTime = Time.time;
+            
             rigidbody.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
         }
+
+        private bool AlreadyJumped() => 
+            Time.deltaTime - _lastJumpTime < _jumpDelay;
     }
 }
